@@ -154,11 +154,13 @@
 #include "internal.h"
 #include "../crypto/internal.h"
 
+#if !defined(OPENSSL_TRUSTY)
 #if defined(OPENSSL_WINDOWS)
 #include <sys/timeb.h>
 #else
 #include <sys/socket.h>
 #include <sys/time.h>
+#endif
 #endif
 
 

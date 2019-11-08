@@ -11,8 +11,13 @@ endif()
 
 include(sources.cmake)
 
+set(BUILD_SHARED_LIBS FALSE)
+set(CMAKE_C_COMPILER_FORCED TRUE)
+set(CMAKE_CXX_COMPILER_FORCED TRUE)
+
 enable_language(C)
 enable_language(CXX)
+
 
 # This is a dummy target which all other targets depend on (manually - see other
 # CMakeLists.txt files). This gives us a hook to add any targets which need to
@@ -393,6 +398,10 @@ if(OPENSSL_SMALL)
   add_definitions(-DOPENSSL_SMALL)
 endif()
 
+if(OPENSSL_NO_STDIO)
+  add_definitions(-DOPENSSL_NO_STDIO)
+endif()
+
 if(CONSTANT_TIME_VALIDATION)
   add_definitions(-DBORINGSSL_CONSTANT_TIME_VALIDATION)
   # Asserts will often test secret data.
@@ -573,7 +582,7 @@ add_library(crypto_test_data OBJECT crypto_test_data.cc)
 add_subdirectory(crypto)
 add_subdirectory(ssl)
 add_subdirectory(ssl/test)
-add_subdirectory(tool)
+# add_subdirectory(tool)
 add_subdirectory(util/fipstools/cavp)
 add_subdirectory(util/fipstools/acvp/modulewrapper)
 add_subdirectory(decrepit)

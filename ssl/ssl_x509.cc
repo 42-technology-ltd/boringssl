@@ -687,16 +687,20 @@ void SSL_CTX_set_verify_depth(SSL_CTX *ctx, int depth) {
   X509_VERIFY_PARAM_set_depth(ctx->param, depth);
 }
 
+#ifndef OPENSSL_NO_STDIO
 int SSL_CTX_set_default_verify_paths(SSL_CTX *ctx) {
   check_ssl_ctx_x509_method(ctx);
   return X509_STORE_set_default_paths(ctx->cert_store);
 }
+#endif
 
+#ifndef OPENSSL_NO_STDIO
 int SSL_CTX_load_verify_locations(SSL_CTX *ctx, const char *ca_file,
                                   const char *ca_dir) {
   check_ssl_ctx_x509_method(ctx);
   return X509_STORE_load_locations(ctx->cert_store, ca_file, ca_dir);
 }
+#endif
 
 void SSL_set_verify_result(SSL *ssl, long result) {
   check_ssl_x509_method(ssl);
