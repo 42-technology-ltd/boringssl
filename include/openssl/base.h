@@ -148,8 +148,6 @@ extern "C" {
 #define OPENSSL_FUCHSIA
 #endif
 
-#define TRUSTY
-
 #if defined(TRUSTY)
 #define OPENSSL_TRUSTY
 #define OPENSSL_NO_THREADS_CORRUPT_MEMORY_AND_LEAK_SECRETS_IF_THREADED
